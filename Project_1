@@ -153,4 +153,4 @@ WHERE member_casual = "casual"
 Group by start_station_name, member_casual
 order by num_of_rides DESC
 
---Now that I have some strng insights, I downloaded the results of my queries to build out my vizualizations.
+--Now that I have some str0ng insights, I downloaded the results of my queries to build out my vizualizations.
