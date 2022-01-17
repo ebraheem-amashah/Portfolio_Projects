@@ -1,21 +1,20 @@
 /*
 Bike-Share Data Exploration, Processing, and Analysis
-Skills used: CASE Statements, Sub-Queries,  Unions, Aggregate Functions, Creating Tables, Creating Views, Converting Data Types
+Skills used: Temp Tables, CASE Statements, Sub-Queries,  Unions, Aggregate Functions, Creating Tables, Creating Views, Converting Data Types
 */
 
--- Business Task: Explore differences between casual memebers and annual members in 12 months worth of data from bike-sharing company.
--- Goal: Design a marketing campain targeting casual riders to increase annual memberships.
--- Process: Clean monthly data for exploration and analysis. I decided to combine the data into one table 
--- 
+-- Business Task: Explore differences between casual memebers and annual members of a bike-sharing company over the past 12 months.
+-- Business Goal: Design a marketing campain targeting casual riders to increase annual memberships.
+-------------------------------------------------------------------------------------------------------------------------------------
 
 
--- I first exported the data into excel to take a look and to understand the contact and structure of the data.
+
+-- I first exported the data into excel to take a look and to understand the content and structure of the data.
 -- For our business task, I decided to leave behind the start_long, start_lat, end_lon, and end_lat columns, which have to do with
--- the geographical coordinates of bike docking stations, because they 
--- are irrelevant to the busienss task.
+-- the geographical coordinates of bike docking stations because they are irrelevant to the busienss task.
 
 ------------------------------------------------------------------------------------------
--- I began by merging my monthly ride data into a single table to be able to observe trends between months to spot seasonality.
+-- I began by merging the monthly ride data into a single table to be able to spot seasonality.
 -- I wrote a query that aggregates all data with no NULL values into a new table. 
 -- This allowed me preserve the raw data in its orginial form, create my new table, and produce clean data for analysis in one step.
 
@@ -152,7 +151,7 @@ order by num_of_rides DESC
 
 ------------------------------------------------------------------------------------
 
--- Lastly, I decided to query the most popular locations for casual riders. This is valueable information as these locations would be the prime targets for 
+-- Next, I decided to query the most popular locations for casual riders. This is valueable information as these locations would be the prime targets for 
 -- our marketing campaign.
 
 SELECT 
@@ -165,5 +164,45 @@ Group by start_station_name, member_casual
 order by num_of_rides DESC
 
 ------------------------------------------------------------------------------------
+
+-- Lastly, I decided to look into the time variable, I want to include this information in my vizualization.
+-- I decided to create a temporary table with some predefined variables. This allows me to get the data I want without too much clutter.
+-- Since the data is in DATETIME format, I decided it would be best to calculate the time difference first before extracting the time component,
+-- this way I don't have to worry about rides that start in one day and end in the next. I then used SUBSTR() to extract the portion I will 
+-- use for my vizualization.
+
+WITH ride_log AS (
+SELECT  
+  rideable_type,
+  member_casual,
+  EXTRACT(TIME FROM started_at) AS start_time,
+  EXTRACT(TIME FROM ended_at) AS end_time,
+  ended_at - started_at AS ride_len_raw,
+  
+
+  
+
+FROM 
+  `case-study-space.cyclist_ridership.annual_trips_clean`
+  ) 
+
+SELECT member_casual, 
+SUBSTR((CAST(ride_len_raw AS STRING)), 6) AS ride_length, 
+ride_len_raw
+        
+FROM ride_log
+
+ORDER BY ride_length DESC
+
+----------------------------------------
+-- Next, I queried the average ride_length for each bike type for casual and annual members
+
+SELECT rideable_type, member_casual, AVG(ride_len_raw) AS average_ride_length
+        
+FROM ride_log
+GROUP BY member_casual, rideable_type
+
+
+
 
 -- Now that I have some strng insights, I downloaded the results of my queries to build out my vizualizations.
