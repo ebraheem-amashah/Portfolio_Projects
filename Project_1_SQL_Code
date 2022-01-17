@@ -173,8 +173,7 @@ order by num_of_rides DESC
 
 ------------------------------------------------------------------------------------
 
--- Lastly, I decided to query the most popular locations for casual riders. This is valueable information as these locations would be the prime targets for 
--- our marketing campaign.
+-- Next, I decided to query the most popular locations for casual riders. These locations would be the prime targets for our marketing campaign.
 
 SELECT 
     start_station_name,
@@ -186,6 +185,32 @@ Group by start_station_name, member_casual
 order by num_of_rides DESC
 
 ------------------------------------------------------------------------------------
+-- Lastly, I want to inspect the average length of the trips taken by members as opposed to the casual riders.
+-- I decided to create a temporary table so I can predefine some variables.
+-- This will save me alot of work down the line.
+-- I should also note that I performed the calculation for the time difference without extracting the time component from my timestamp so I don't 
+-- have to deal with rides that begin in one day and end the next. Instead I used the SUBSTR() to extract the time portion of the results from the temp table
+-- after the calculation has been made.
 
--- Now that I have some strng insights, I downloaded the results of my queries to build out my vizualizations.
+WITH ride_log AS (
+SELECT  
+  member_casual,
+  EXTRACT(TIME FROM started_at) AS start_time,
+  EXTRACT(TIME FROM ended_at) AS end_time,
+  ended_at - started_at AS ride_len_raw,
+  SUBSTR((CAST((ended_at - started_at) AS STRING)), 6) AS ride_length
+
+  
+
+FROM 
+  `case-study-space.cyclist_ridership.annual_trips_clean`
+) 
+SELECT member_casual, AVG(ride_len_raw) AS average_ride_length
+        
+FROM ride_log
+GROUP BY member_casual
+
+
+-------------------------------------------------------------------------------------
+-- Now that I have some strong insights, I downloaded the results of my queries to build out my vizualizations.
 
