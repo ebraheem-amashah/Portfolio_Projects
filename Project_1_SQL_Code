@@ -124,22 +124,20 @@ ORDER BY count DESC
 
 -- NOTES: After running above query, I noticed that over 15% of casual riders prefer the docked_bike type, whereas almost 0 annual members use this type of bike.
 -- I decided to look for where these bikes are being used. This information will allow the company to target these users in their marketing campaign.
--- This following query will give me the top 15 locations where casual riders are going for their docked bikes, an advertisment placed at any one of these locations will certainly reach the target audience.
+-- This following query will give me the locations where casual riders are going for their docked bikes, an advertisment placed at any one of these locations will certainly reach the target audience.
 
 SELECT 
-    COUNT(ride_id) AS num_of_rides,
     start_station_name,
-
-
-FROM `case-study-space.cyclist_ridership.annual_trips_clean`
-
-WHERE member_casual = 'casual' 
-    AND rideable_type = 'docked_bike'
-
-GROUP BY  start_station_name
-ORDER BY count(ride_id) DESC
-
-LIMIT 15
+    count(ride_id) AS num_of_rides
+    
+FROM
+    `case-study-space.cyclist_ridership.annual_trips_clean`
+WHERE 
+    member_casual = "casual"
+    AND rideable_type = "docked_bike"
+    
+Group by start_station_name
+order by num_of_rides DESC
 
 ------------------------------------------------------------------------------------
 
