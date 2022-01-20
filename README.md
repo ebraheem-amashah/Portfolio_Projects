@@ -27,6 +27,7 @@
   * Build a marketing campaign advertising member-exclusive deals on docked bikes while highlighting their uses and availability.
   * Ads should be placed primarily in stations where most docked bikes and casual rides start and end at, this information is highlighted in an interactive             vizualization.
 
-![Bike- Share Trends](https://user-images.githubusercontent.com/92
-![Bike-Share Insights](https://user-images.githubusercontent.com/92263249/150392094-6c338647-415f-4a1b-9900-aae5708d0156.png)
-263249/150392068-648541e6-71a5-4301-8776-a37319b452d7.png)
+
+![Bike Share Insights](https://user-images.githubusercontent.com/92263249/150392094-6c338647-415f-4a1b-9900-aae5708d0156.png)
+![Bike Share Trends](https://user-images.githubusercontent.com/92263249/150392352-c80b6d54-beba-4a4a-a58d-bb3c0955195f.png)
+
