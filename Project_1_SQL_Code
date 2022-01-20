@@ -1,6 +1,6 @@
 /*
 Bike-Share Data Exploration, Processing, and Analysis
-Skills used: Temp Tables, CASE Statements, Sub-Queries,  Unions, Aggregate Functions, Creating Tables, Creating Views, Converting Data Types
+Skills used: CTE's, CASE Statements, Sub-Queries,  Unions, Aggregate Functions, Creating Tables, Creating Views, Converting Data Types
 */
 
 -- Business Task: Explore differences between casual memebers and annual members in 12 months worth of data from bike-sharing company.
