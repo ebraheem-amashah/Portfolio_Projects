@@ -13,3 +13,20 @@
 * **Business Goal** Leverage data to design an effective marketing campaign targeting casual riders to increase annual membership.
 
 * **Steps**
+  * Cleaned over 5.5 million rows of data
+  * Combined monthly data into an annual data set 
+  * validated data to ensure the metrics are of same unit and measure the same variables
+  * Compare and contrast members and casual riders with respect to bike-type, most used locations, average ride-length, etc.
+
+* **Key Insights**
+  * Casual riders peak in the summer making up 8.1% of total annual ridership in the month of July alone.
+  * Casual riders hit their lowest numbers in the winter, with 0.2% of annual ridership in February.
+  * 15% of casual riders use docked bikes in comparison to 0% of members.
+
+* **Reccomendations** 
+  * Build a marketing campaign advertising member-exclusive deals on docked bikes while highlighting their uses and availability.
+  * Ads should be placed primarily in stations where most docked bikes and casual rides start and end at, this information is highlighted in an interactive             vizualization.
+
+![Bike- Share Trends](https://user-images.githubusercontent.com/92
+![Bike-Share Insights](https://user-images.githubusercontent.com/92263249/150392094-6c338647-415f-4a1b-9900-aae5708d0156.png)
+263249/150392068-648541e6-71a5-4301-8776-a37319b452d7.png)
