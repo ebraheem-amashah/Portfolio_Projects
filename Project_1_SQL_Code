@@ -141,7 +141,7 @@ order by num_of_rides DESC
 
 ------------------------------------------------------------------------------------
 
--- Another angle I decided to examine is seasnality, I wanted to write a query that highlight rank the number of member and casual riders each month.
+-- Another angle I decided to examine is seasonality, I wanted to write a query that highlight rank the number of member and casual riders each month.
 -- The DATE variable, listed in the started_at and ended_at columns are DATETIME format, so I wrote a query to extract the month element to group the results.
 
 SELECT 
@@ -154,6 +154,20 @@ Round((count(ride_id) / ( select count(ride_id) FROM`case-study-space.cyclist_ri
 FROM `case-study-space.cyclist_ridership.annual_trips_clean`
 group by member_casual, month
 order by percentage_of_total_rides DESC
+
+-- After ranking the monthly rides and membership status relative to the entire year, I analyzed the membership status of the rides month to month
+-- I wrote a query to rank the month by the number of rides in DESC order, and calculate the membership status ratio within each month.
+
+SELECT 
+EXTRACT(MONTH FROM started_at) as month_of_year,
+    count(ride_id) AS num_of_rides,
+    ROUND(AVG(CASE WHEN member_casual = "casual" THEN 1
+        ELSE 0 END), 2) AS pct_of_casuals,
+    ROUND(AVG(CASE WHEN member_casual = 'member' THEN 1 
+        ELSE 0 END), 2) AS pct_of_members
+from`case-study-space.cyclist_ridership.annual_trips_clean`
+Group by month_of_year
+order by num_of_rides DESC
 
 
 ------------------------------------------------------------------------------------
